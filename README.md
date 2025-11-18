@@ -1,7 +1,7 @@
 # Project: NAME
 
 ## Contributors
-Sharon Zheng
+Sharon Zheng, Kevin Mei
 
 ## Dependencies
 - LANGUAGE AND VERSION
