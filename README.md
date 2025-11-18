@@ -1,11 +1,12 @@
 # Project: NAME
 
 ## Contributors
-NAME, NAME, NAME
+Sharon Zheng
 
 ## Dependencies
 - LANGUAGE AND VERSION
 - EXTERNAL LIBRARIES
+    - ASM (https://asm.ow2.io/) library for program analysis
 - ETC
 
 ## Build Instructions
