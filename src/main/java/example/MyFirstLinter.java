@@ -78,6 +78,18 @@ public class MyFirstLinter {
         if (className.length() > 50) {
             System.out.println("Error: class name is too long");
         }
+
+		// Lint Check: Class Cannot Be Publicly Constructed
+		boolean hasPublicConstructor = false;
+
+		for (MethodNode methodNode : classNode.methods) {
+			if (methodNode.name.equals("<init>"))
+				if ((methodNode.access & Opcodes.ACC_PUBLIC) != 0)
+					hasPublicConstructor = true;
+		}
+
+		if (!hasPublicConstructor)
+			System.out.println("    no public constructor : ");
 	}
 
 	private static void printFields(ClassNode classNode) {
