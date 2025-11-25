@@ -101,7 +101,10 @@ public class MyFirstLinter {
 					+ ((field.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED | Opcodes.ACC_PRIVATE)) == 0));
 
 			// TODO: how do I write a lint check to tell if this field has a bad name?
-			
+			if (!field.name.matches("[a-z][a-zA-Z0-9]*")) {
+				System.out.println("    bad name: " + field.name);
+			}
+
 			System.out.println();
 		}
 	}
@@ -129,6 +132,11 @@ public class MyFirstLinter {
 			// How do you tell if something has default access? (ie no access modifiers?)
 
 			System.out.println();
+
+			// Lint Check: Excessive Method Length (>50 Instructions)
+			if (method.instructions.size() > 50) {
+				System.out.println("    excessive method length: " + method.name + " (" + method.instructions.size() + " instructions)");
+			}
 
 			// Print the method's instructions
 			printInstructions(method);
