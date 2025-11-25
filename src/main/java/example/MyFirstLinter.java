@@ -96,7 +96,10 @@ public class MyFirstLinter {
 					+ ((field.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED | Opcodes.ACC_PRIVATE)) == 0));
 
 			// TODO: how do I write a lint check to tell if this field has a bad name?
-			
+			if (!field.name.matches("[a-z][a-zA-Z0-9]*")) {
+				System.out.println("    bad name: " + field.name);
+			}
+
 			System.out.println();
 		}
 	}
