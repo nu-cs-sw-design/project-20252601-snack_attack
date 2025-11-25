@@ -128,6 +128,11 @@ public class MyFirstLinter {
 
 			System.out.println();
 
+			// Lint Check: Excessive Method Length (>50 Instructions)
+			if (method.instructions.size() > 50) {
+				System.out.println("    excessive method length: " + method.name + " (" + method.instructions.size() + " instructions)");
+			}
+
 			// Print the method's instructions
 			printInstructions(method);
 		}
