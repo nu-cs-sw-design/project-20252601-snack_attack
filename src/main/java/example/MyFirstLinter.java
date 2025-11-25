@@ -88,7 +88,13 @@ public class MyFirstLinter {
 			System.out.println("	public? "
 					+ ((field.access & Opcodes.ACC_PUBLIC) != 0));
 			// TODO: how do you tell if something has package-private access? (ie no access modifiers?)
-			
+			System.out.println("    protected? "
+					+ ((field.access & Opcodes.ACC_PROTECTED) != 0));
+			System.out.println("    private? "
+					+ ((field.access & Opcodes.ACC_PRIVATE) != 0));
+			System.out.println("    package-private? "
+					+ ((field.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED | Opcodes.ACC_PRIVATE)) == 0));
+
 			// TODO: how do I write a lint check to tell if this field has a bad name?
 			
 			System.out.println();
