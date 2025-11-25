@@ -158,8 +158,9 @@ public class MyFirstLinter {
 			// TODO: how do I write a lint check to tell if this method has a bad name?
 		}
 
-        if (Character.isUpperCase(methodNode.name.charAt(0))) {
-            System.out.println("Error: method name begins with uppercase");
+        // method name must be camel case
+        if (!(methodNode.name).matches("[a-z][a-zA-Z0-9]*")) {
+            System.out.println("Error: method name is not in camel case");
         }
 	}
 }
