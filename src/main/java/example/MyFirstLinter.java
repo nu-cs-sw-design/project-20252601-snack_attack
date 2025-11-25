@@ -64,6 +64,15 @@ public class MyFirstLinter {
 		System.out.println("Extends: " + classNode.superName);
 		System.out.println("Implements: " + classNode.interfaces);
 		// TODO: how do I write a lint check to tell if this class has a bad name?
+
+        String internalClassName = (Type.getObjectType(classNode.name).getClassName()).toString();
+        String[] classNameArray = internalClassName.split("\\.");
+        String className = classNameArray[classNameArray.length - 1];
+
+        // name should be in PascalCase
+        if (!(className).matches("([A-Z][a-z0-9]*)+")) {
+            System.out.println("Error: class name is not in PascalCase");
+        }
 	}
 
 	private static void printFields(ClassNode classNode) {
@@ -129,7 +138,7 @@ public class MyFirstLinter {
 				System.out.println("		Call method: " + methodCall.owner + " "
 						+ methodCall.name);
 			} else if (insn instanceof VarInsnNode) {
-				// Some some kind of variable *LOAD or *STORE operation.
+				// Some kind of variable *LOAD or *STORE operation.
 				VarInsnNode varInsn = (VarInsnNode) insn;
 				int opCode = varInsn.getOpcode();
 				// See VarInsnNode.setOpcode for the list of possible values of
@@ -142,5 +151,9 @@ public class MyFirstLinter {
 			
 			// TODO: how do I write a lint check to tell if this method has a bad name?
 		}
+
+        if (Character.isUpperCase(methodNode.name.charAt(0))) {
+            System.out.println("Error: method name begins with uppercase");
+        }
 	}
 }
