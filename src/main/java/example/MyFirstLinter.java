@@ -69,9 +69,14 @@ public class MyFirstLinter {
         String[] classNameArray = internalClassName.split("\\.");
         String className = classNameArray[classNameArray.length - 1];
 
-        // name should be in PascalCase
+        // lint check: name should be in PascalCase
         if (!(className).matches("([A-Z][a-z0-9]*)+")) {
             System.out.println("Error: class name is not in PascalCase");
+        }
+
+        // lint check: name should be < 50 characters
+        if (className.length() > 50) {
+            System.out.println("Error: class name is too long");
         }
 	}
 
@@ -158,7 +163,7 @@ public class MyFirstLinter {
 			// TODO: how do I write a lint check to tell if this method has a bad name?
 		}
 
-        // method name must be camel case
+        // lint check: method name must be camel case
         if (!(methodNode.name).matches("[a-z][a-zA-Z0-9]*")) {
             System.out.println("Error: method name is not in camel case");
         }

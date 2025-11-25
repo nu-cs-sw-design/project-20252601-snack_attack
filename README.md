@@ -1,4 +1,4 @@
-# Project: NAME
+# Project: Java Linter
 
 ## Contributors
 Sharon Zheng, Kevin Mei
