@@ -29,11 +29,5 @@ public class InstructionAnalyzer implements Analyzer<MethodNode> {
 			// This list of direct known subclasses may be useful:
 			// http://asm.ow2.org/asm50/javadoc/user/org/objectweb/asm/tree/AbstractInsnNode.html
 		}
-		// DONE: how do I write a lint check to tell if this method has a bad name?
-
-		// lint check: method name must be camel case
-		if (!(methodNode.name).matches("[a-z][a-zA-Z0-9]*")) {
-			System.out.println("Error: method name is not in camel case");
-		}
 	}
 }
