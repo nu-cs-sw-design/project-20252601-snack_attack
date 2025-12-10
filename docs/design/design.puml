@@ -1,2 +1,40 @@
 @startuml
+
+interface Analyzer {
+    +analyze(target: NodeType)
+}
+
+class MyFirstLinter {
+    +main(args: String[]) : void
+}
+
+class ClassAnalyzer {
+    +analyze(classNode : ClassNode)
+}
+
+class FieldAnalyzer {
+    +analyzer(classNode : ClassNode)
+}
+
+class MethodAnalyzer {
+    -instructionAnalyzer : InstructionAnalyzer
+    +MethodAnalyzer(instructionAnalyzer : InstructionAnalyzer)
+    +analyze(classNode : ClassNode)
+}
+
+class InstructionAnalyzer {
+    +analyze(methodNode : MethodNode)
+}
+
+ClassAnalyzer ..|> Analyzer
+FieldAnalyzer ..|> Analyzer
+MethodAnalyzer ..|> Analyzer
+InstructionAnalyzer ..|> Analyzer
+
+MyFirstLinter --> ClassAnalyzer
+MyFirstLinter --> FieldAnalyzer
+MyFirstLinter --> MethodAnalyzer
+
+MethodAnalyzer --> InstructionAnalyzer
+
 @enduml
