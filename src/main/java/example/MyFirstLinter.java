@@ -6,13 +6,7 @@ import java.util.List;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
+import org.objectweb.asm.tree.*;
 
 // FIXME: this code has TERRIBLE DESIGN all around
 public class MyFirstLinter {
@@ -31,7 +25,7 @@ public class MyFirstLinter {
 	 * @throws ClassNotFoundException
 	 */
 	public static void main(String[] args) throws IOException {
-		// TODO: Learn how to create separate Run Configurations so you can run
+		// DONE: Learn how to create separate Run Configurations so you can run
 		// your code on different programs without changing the code each time.
 		
 		for (String className : args) {
@@ -63,7 +57,7 @@ public class MyFirstLinter {
 				+ ((classNode.access & Opcodes.ACC_PUBLIC) != 0));
 		System.out.println("Extends: " + classNode.superName);
 		System.out.println("Implements: " + classNode.interfaces);
-		// TODO: how do I write a lint check to tell if this class has a bad name?
+		// DONE: how do I write a lint check to tell if this class has a bad name?
 
         String internalClassName = (Type.getObjectType(classNode.name).getClassName()).toString();
         String[] classNameArray = internalClassName.split("\\.");
@@ -104,7 +98,7 @@ public class MyFirstLinter {
 
 			System.out.println("	public? "
 					+ ((field.access & Opcodes.ACC_PUBLIC) != 0));
-			// TODO: how do you tell if something has package-private access? (ie no access modifiers?)
+			// DONE: how do you tell if something has package-private access? (ie no access modifiers?)
 			System.out.println("    protected? "
 					+ ((field.access & Opcodes.ACC_PROTECTED) != 0));
 			System.out.println("    private? "
@@ -112,7 +106,7 @@ public class MyFirstLinter {
 			System.out.println("    package-private? "
 					+ ((field.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED | Opcodes.ACC_PRIVATE)) == 0));
 
-			// TODO: how do I write a lint check to tell if this field has a bad name?
+			// DONE: how do I write a lint check to tell if this field has a bad name?
 			if (!field.name.matches("[a-z][a-zA-Z0-9]*")) {
 				System.out.println("    bad name: " + field.name);
 			}
@@ -134,7 +128,14 @@ public class MyFirstLinter {
 			System.out.println("	Args: ");
 			for (Type argType : Type.getArgumentTypes(method.desc)) {
 				System.out.println("		" + argType.getClassName());
-				// FIXME: what is the argument's *variable* name?
+
+				// DONE: what is the argument's *variable* name?
+                // if complied with debug info, argument var there, else it doesn't exist
+                if (method.localVariables != null) {
+                    for (LocalVariableNode localVariable : method.localVariables) {
+                        System.out.println("		" + localVariable.name);
+                    }
+                }
 			}
 
 			System.out.println("	public? "
@@ -179,9 +180,8 @@ public class MyFirstLinter {
 			// There are others...
 			// This list of direct known subclasses may be useful:
 			// http://asm.ow2.org/asm50/javadoc/user/org/objectweb/asm/tree/AbstractInsnNode.html
-			
-			// TODO: how do I write a lint check to tell if this method has a bad name?
 		}
+        // DONE: how do I write a lint check to tell if this method has a bad name?
 
         // lint check: method name must be camel case
         if (!(methodNode.name).matches("[a-z][a-zA-Z0-9]*")) {
