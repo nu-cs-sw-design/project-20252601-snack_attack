@@ -128,14 +128,6 @@ public class MyFirstLinter {
 			System.out.println("	Args: ");
 			for (Type argType : Type.getArgumentTypes(method.desc)) {
 				System.out.println("		" + argType.getClassName());
-
-				// DONE: what is the argument's *variable* name?
-                // if complied with debug info, argument var there, else it doesn't exist
-                if (method.localVariables != null) {
-                    for (LocalVariableNode localVariable : method.localVariables) {
-                        System.out.println("		" + localVariable.name);
-                    }
-                }
 			}
 
 			System.out.println("	public? "
