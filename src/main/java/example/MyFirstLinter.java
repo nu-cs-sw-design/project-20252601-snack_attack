@@ -142,6 +142,8 @@ public class MyFirstLinter {
 			System.out.println("	static? "
 					+ ((method.access & Opcodes.ACC_STATIC) != 0));
 			// How do you tell if something has default access? (ie no access modifiers?)
+			System.out.println("    default? "
+					+ ((method.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED | Opcodes.ACC_PRIVATE)) == 0));
 
 			System.out.println();
 
