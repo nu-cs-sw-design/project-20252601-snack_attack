@@ -6,6 +6,13 @@ import java.util.List;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldNode;
+import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.VarInsnNode;
 import org.objectweb.asm.tree.*;
 
 // FIXME: this code has TERRIBLE DESIGN all around
@@ -128,7 +135,15 @@ public class MyFirstLinter {
 			System.out.println("	Args: ");
 			for (Type argType : Type.getArgumentTypes(method.desc)) {
 				System.out.println("		" + argType.getClassName());
-			}
+
+                // DONE: what is the argument's *variable* name?
+                // if complied with debug info, argument var there, else it doesn't exist
+                if (method.localVariables != null) {
+                    for (LocalVariableNode localVariable : method.localVariables) {
+                        System.out.println("		" + localVariable.name);
+                    }
+                }
+            }
 
 			System.out.println("	public? "
 					+ ((method.access & Opcodes.ACC_PUBLIC) != 0));
